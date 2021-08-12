@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block header %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="sidebar">
+            <form action="/reset" method="post">
+                <input type="hidden" name="imgName" value="{{ img }}">
+                <button type="submit" class="sidebar-btn"><i class="fa fa-trash-o"></i></button>
+            </form>
+            <form action="/reset" method="post">
+                <input type="hidden" name="imgName" value="{{ img }}">
+                <button type="submit" class="sidebar-btn"><i class="fa fa-share"></i></button>
+            </form>
+            <form action="/reset" method="post">
+                <input type="hidden" name="imgName" value="{{ img }}">
+                <button type="submit" class="sidebar-btn"><i class="fa fa-gears"></i></button>
+            </form>
+            <form action="/reset" method="post">
+                <input type="hidden" name="imgName" value="{{ img }}">
+                <button type="submit" class="sidebar-btn"><i class="fa fa-folder-open"></i></button>
+            </form>
+        </div>
+        <div class="editing">
+            <img src="{{ url_for('static', filename='img/'+img) }}" alt="">
+        </div>
+        <div class="controls">
+            <button class="control-btn" onclick="toggleControl('rotate-form')">Winkel</button>
+            <form action="/rotate" method="post" id="form-rotate" class="control-form rotate-form">
+                <input type="range" min="-360" max="360" value="0" name="angle" class="slider" id="slider-rotate" oninput="handleInput('slider-rotate')" onmouseup="submitForm('form-rotate')">
+                <p id="slider-rotate-field" class="slider-value">0</p>
+                <input type="hidden" name="imgName" value="{{ img }}">
+            </form>
+            <button class="control-btn" onclick="toggleControl('color-form')">Farben</button>
+            <!--<form action="/removeColor" method="post" class="control-form color-form">
+                <input type="hidden" name="imgName" value="{{ img }}">
+                <input type="submit" value="Schwarzweiß">
+            </form>-->
+            <form action="/a" method="post" class="control-form color-form">
+                <label for="factor" style="color: white;">Kontrastfaktor:</label>
+                <input type="text" name="factor">
+                <input type="hidden" name="imgName" value="{{ img }}">
+            </form>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
+    </div>
+    <div class="row bottom-controls">
+        
+    </div>
+</div>
+
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% endblock %}
